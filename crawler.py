@@ -1,4 +1,5 @@
-
+import requests
+from lxml import etree
 
 
 class Crawler(object):
@@ -55,8 +56,7 @@ class Crawler(object):
             #          to crawl the content
             #       3. append the date, title and content to
             #          contents
-        return contents, last_date
-
+        return contents
     def crawl_content(self, url):
         """Crawl the content of given url
 
