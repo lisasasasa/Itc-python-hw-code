@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime
 from lxml import etree
 from datetime import datetime
 from time import sleep
@@ -56,9 +57,9 @@ class Crawler(object):
         dates = root.xpath('//tr/td[1]/text()')
         titles = root.xpath('//tr/td[2]/a/text()')
         rel_urls = root.xpath('//tr/td[2]/a/@href')
-
         contents = list()
         for date , title , rel_url in zip(dates , titles, rel_urls):
+            last_date = datetime.strptime(date,'%Y-%m-%d')
             url = self.base_url + rel_url
             #import pdb
             #pdb.set_trace()
@@ -70,7 +71,7 @@ class Crawler(object):
             #       3. append the date, title and content to
             #          contents
 
-        return contents
+        return contents,last_date
     def crawl_content(self, url):
         """Crawl the content of given url
 
@@ -85,7 +86,5 @@ class Crawler(object):
         res = requests.get(url).content.decode()
         parser = etree.HTML(res)
         content = parser.xpath('/html/body/div[1]/div/div[2]/div/div/div[2]/div/div[2]//text()')
-        import pdb
-        pdb.set_trace()
         return content
         
