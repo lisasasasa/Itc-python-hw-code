@@ -11,8 +11,5 @@ if __name__ == '__main__':
     for date,title,content in contents:
         f.write('"'+date.replace('"','""')+'",') 
         f.write('"'+title.replace('"','""')+'",') 
-        final_content = ''
-        for tmp_content in content:
-            final_content += tmp_content.replace('\r','').replace('\xa0','\n').replace('"','""')
-        f.write('"'+final_content+'"\n')
+        f.write('"'+''.join(content).replace('\r','').replace('\xa0','\n').replace('"','""')+'"\n')
     f.close()
