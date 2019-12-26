@@ -86,5 +86,7 @@ class Crawler(object):
         res = requests.get(url).content.decode()
         parser = etree.HTML(res)
         content = parser.xpath('/html/body/div[1]/div/div[2]/div/div/div[2]/div/div[2]//text()')
+        #import pdb
+        #pdb.set_trace()
         return content
         
